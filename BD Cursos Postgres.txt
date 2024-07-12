@@ -1,0 +1,142 @@
+
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    apellido VARCHAR(100) NOT NULL,
+    dni VARCHAR(20) UNIQUE NOT NULL,
+    correo VARCHAR(100),
+    PASSWORD VARCHAR(100) NOT null,
+    celular VARCHAR(20),
+    rol VARCHAR(20) NOT NULL -- Puede ser 'estudiante', 'profesor', 'administrador', etc.
+);
+CREATE TABLE cursos(
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    UNIQUE (nombre)
+);
+CREATE TABLE notas (
+    id SERIAL PRIMARY KEY,
+    nota DECIMAL(4,2) NULL,
+    idusuario INTEGER REFERENCES usuarios(id),
+    idcurso INTEGER REFERENCES cursos(id),
+    CONSTRAINT fk_notas_usuario FOREIGN KEY (idusuario) REFERENCES usuarios(id),
+    CONSTRAINT fk_notas_curso FOREIGN KEY (idcurso) REFERENCES cursos(id)
+);
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Juan', 'Perez', '12345678A', 'juan@example.com', 'password123', '999-888-777', 'E');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('María', 'Gomez', '98765432B', 'maria@example.com', 'password456', '888-777-666', 'P');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Carlos', 'López', '56789012C', 'carlos@example.com', 'password789', '777-666-555', 'A');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Ana', 'Martinez', '34567890D', 'ana@example.com', 'passwordabc', '666-555-444', 'E');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Pedro', 'Rodriguez', '90123456E', 'pedro@example.com', 'passworddef', '555-444-333', 'P');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Laura', 'Sanchez', '23456789F', 'laura@example.com', 'pass123', '444-333-222', 'A');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Sofia', 'Garcia', '45678901G', 'sofia@example.com', 'pass456', '333-222-111', 'E');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Jorge', 'Lopez', '67890123H', 'jorge@example.com', 'pass789', '222-111-000', 'P');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Maria', 'Perez', '89012345I', 'maria2@example.com', 'abc123', '111-000-999', 'A');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Pablo', 'Gomez', '01234567J', 'pablo@example.com', 'def456', '000-999-888', 'E');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Elena', 'Martinez', '23456789K', 'elena@example.com', 'ghi789', '999-888-777', 'P');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Diego', 'Sanchez', '45678901L', 'diego@example.com', 'jkl123', '888-777-666', 'A');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Luis', 'Garcia', '67890123M', 'luis@example.com', 'mno456', '777-666-555', 'E');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Ana', 'Lopez', '89012345N', 'ana2@example.com', 'pqr789', '666-555-444', 'P');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Marcos', 'Perez', '01234567O', 'marcos@example.com', 'stu123', '555-444-333', 'A');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Carla', 'Gomez', '23456789P', 'carla@example.com', 'vwx456', '444-333-222', 'E');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Santiago', 'Martinez', '45678901Q', 'santiago@example.com', 'yz123', '333-222-111', 'P');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Lucia', 'Sanchez', '67890123R', 'lucia@example.com', 'xyz456', '222-111-000', 'A');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Mateo', 'Garcia', '89012345S', 'mateo@example.com', 'abc456', '111-000-999', 'E');
+
+INSERT INTO usuarios (nombre, apellido, dni, correo, password, celular, rol)
+VALUES ('Valentina', 'Lopez', '01234567T', 'valentina@example.com', 'def789', '000-999-888', 'P');
+
+
+INSERT INTO cursos(nombre) VALUES
+('Matemáticas Avanzadas'),
+('Física Aplicada'),
+('Programación Orientada a Objetos'),
+('Diseño de Algoritmos'),
+('Ingeniería de Software'),
+('Bases de Datos Avanzadas'),
+('Economía Empresarial'),
+('Marketing Estratégico'),
+('Gestión de Proyectos'),
+('Biología Molecular');
+
+-- Juan
+INSERT INTO notas (nota, idusuario, idcurso) VALUES
+(16.5, 1, 1), -- Matemáticas Avanzadas
+(18.3, 1, 2); -- Física Aplicada
+
+-- María
+INSERT INTO notas (nota, idusuario, idcurso) VALUES
+(17.8, 2, 1), -- Matemáticas Avanzadas
+(15.2, 2, 3); -- Programación Orientada a Objetos
+
+-- Pedro
+INSERT INTO notas (nota, idusuario, idcurso) VALUES
+(14.7, 3, 1), -- Matemáticas Avanzadas
+(16.9, 3, 4); -- Diseño de Algoritmos
+
+-- Laura
+INSERT INTO notas (nota, idusuario, idcurso) VALUES
+(19.1, 4, 2), -- Física Aplicada
+(17.4, 4, 3); -- Programación Orientada a Objetos
+
+-- Elena
+INSERT INTO notas (nota, idusuario, idcurso) VALUES
+(15.8, 13, 2), -- Física Aplicada
+(18.5, 13, 4); -- Diseño de Algoritmos
+
+-- Miguel
+INSERT INTO notas (nota, idusuario, idcurso) VALUES
+(16.2, 14, 3), -- Programación Orientada a Objetos
+(17.9, 14, 5); -- Ingeniería de Software
+
+-- Carla
+INSERT INTO notas (nota, idusuario, idcurso) VALUES
+(18.7, 15, 3), -- Programación Orientada a Objetos
+(16.4, 15, 6); -- Bases de Datos Avanzadas
+
+-- Mario
+INSERT INTO notas (nota, idusuario, idcurso) VALUES
+(15.5, 16, 4), -- Diseño de Algoritmos
+(17.2, 16, 5); -- Ingeniería de Software
+
+-- Alba
+INSERT INTO notas (nota, idusuario, idcurso) VALUES
+(19.0, 20, 4), -- Diseño de Algoritmos
+(18.3, 20, 6); -- Bases de Datos Avanzadasusuarios
